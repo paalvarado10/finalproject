@@ -59,6 +59,7 @@ App.propTypes = {
 export default withTracker(() => {
 
   Meteor.subscribe('producciones');
+  
   return {
     producciones: Producciones.find({}).fetch(),
     currentUser: Meteor.user()

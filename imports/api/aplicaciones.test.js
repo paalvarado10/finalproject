@@ -34,6 +34,7 @@ if (Meteor.isServer) {
       it("se puede aceptar una aplicacion", () => {
         Aplicaciones.update(Aplicaciones.find().fetch()[0]._id,{ $set: { aceptada: true } });
         assert.equal(Aplicaciones.find().fetch()[0].aceptada, true);
+        resetDatabase();
       });
     });
   });

@@ -65,7 +65,7 @@ class AplicantesApp extends Component {
                     </ul>
                 </nav>
 
-                <div className="container">
+                <div className="container prueba">
                     {this.renderRedirect()}
                     <button className="btn btn-primary inicio btn-lg" onClick={this.setRedirect}>Devolverse</button>
                 </div>
