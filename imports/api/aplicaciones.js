@@ -41,6 +41,7 @@ Meteor.methods({
         if (aplicacion.idAplicante !== this.userId) {
             throw new Meteor.Error('not-authorized');
         }
+
         Aplicaciones.remove(aplicacionId);
     },
 
@@ -51,10 +52,8 @@ Meteor.methods({
         const aplicacion = Aplicaciones.findOne(aplicacionId);
 
         if (aplicacion.idAplicante !== this.userId) {
-            // If the task is private, make sure only the owner can delete it
             throw new Meteor.Error('not-authorized');
         }
-
         Aplicaciones.update(aplicacionId, { $set: { aceptada: true } });
     }
 });
