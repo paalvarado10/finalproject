@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0",
+    "faker": "^4.1.0",
     "meteor-node-stubs": "^0.4.1",
     "react": "^16.6.0",
     "react-bootstrap": "^0.32.4",
@@ -33,5 +34,9 @@
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-meteor": "^5.1.0",
     "eslint-plugin-react": "^7.11.1"
+    }
+  },
+  "devDependencies": {
+    "chai": "^4.2.0"
   }
 }

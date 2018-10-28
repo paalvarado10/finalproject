@@ -21,3 +21,10 @@ react-meteor-data
 accounts-ui
 accounts-password
 check
+practicalmeteor:mocha
+meteortesting:mocha
+xolvio:cleaner
+dburles:factory
+practicalmeteor:sinon
+practicalmeteor:chai
+random
