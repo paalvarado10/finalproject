@@ -24,9 +24,9 @@ export class AplicantesCard extends Component {
                     <h3 className="card-title">Aplicante</h3>
                 </div>
                 <ul className="list-group list-group-flush">
-                    
-                    {/*aqui va toda la informacion*/}
-
+                    <li className="list-group-item"><strong>Nombre Producción: </strong> {this.props.produccion.nombre}</li>
+                    <li className="list-group-item"><strong>Descripción: </strong> {this.props.produccion.descripcion}</li>
+                    <li className="list-group-item"><strong>Nombre Aplicante: </strong> {this.props.usuario.username}</li>
                 </ul>
                 {/*boton para aceptar una aplicacion*/}
                 {this.props.aplicacion.idPublicador = this.props.currentUser ?
