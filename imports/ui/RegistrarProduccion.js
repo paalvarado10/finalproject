@@ -164,7 +164,7 @@ class RegistrarProduccion extends Component {
     var rta = true;
     for(const rol in this.state.roles)
     {
-      if(rol.rol === '' || rol.cantArtistas === 0)
+      if(rol.rol === '' || rol.cantArtistas <= 0)
       {
         rta = false;
       }
