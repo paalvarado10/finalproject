@@ -1,6 +1,6 @@
 # El arte de encontrarnos
 
-Aplicación para encontrar los artistas que necesitas en tus obras.
+WebApp to find the artists that you need for any art production. 
 
 ## Table of Contents
 
@@ -23,7 +23,7 @@ Aplicación para encontrar los artistas que necesitas en tus obras.
 ## Installation
 
 - clone the repo on your console, instructions [below](#clone)
-- use `cd project3` to enter the main folder
+- use `cd finalproject` to enter the main folder
 - use `meteor npm install` to install npm dependencies
 - use `meteor` to run the server locally at port you defined or otherwise it's port 3000 (mongo will run in the next port, 3001 in this case)
 - follow [setup](#setup) guide
