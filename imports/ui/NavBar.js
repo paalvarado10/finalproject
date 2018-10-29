@@ -13,6 +13,16 @@ class NavBar extends Component {
     };
   }
 
+  cerrarSesion() {
+    if (Meteor.user()) {
+      Meteor.logout((e) => {
+        if (e !== undefined) {
+          console.log('ERROR: no fue posible realizar un logout:' + e);
+        } 
+      });
+    }
+  }
+
   render() {
     return (
       <nav className="navbar navbar-light bg-light sticky-top">
@@ -30,7 +40,7 @@ class NavBar extends Component {
             </div> 
             
             <div className="col nav-item navbar-tab">            
-              <button type="button" className="btn btn-primary" onClick={this.props.cerrarSesion}>Cerrar sesión</button>           
+              <button type="button" className="btn btn-primary" onClick={this.cerrarSesion.bind(this)}>Cerrar sesión</button>           
             </div>
 
           </div>
