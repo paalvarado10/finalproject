@@ -1,5 +1,6 @@
-# Coporative carpooling!
+# El arte de encontrarnos
 
+Aplicación para encontrar los artistas que necesitas en tus obras.
 
 ## Table of Contents
 
