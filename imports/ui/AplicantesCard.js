@@ -1,44 +1,102 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
+import PropTypes from 'prop-types';
 
-export class AplicantesCard extends Component {
+export default class AplicantesCard extends Component {
 
-    constructor(props) {
-        super(props);
-        this.removerAplicacion = this.removerAplicacion.bind(this);
-        this.aceptarAplicacion = this.aceptarAplicacion.bind(this);
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      
+    };
+
+    this.removerAplicacion = this.removerAplicacion.bind(this);
+    this.aceptarAplicacion = this.aceptarAplicacion.bind(this);
+    this.rechazarAplicacion = this.rechazarAplicacion.bind(this);
+    this.marcarComoLeida = this.marcarComoLeida.bind(this);
+    this.marcarComoNoLeida = this.marcarComoNoLeida.bind(this);
+  }
+
+  aceptarAplicacion() {
+    Meteor.call('aplicaciones.aceptar', this.props.aplicacion._id);
+  }
+
+  rechazarAplicacion() {
+    Meteor.call('aplicaciones.rechazar', this.props.aplicacion._id);
+  }
+
+  removerAplicacion() {
+    Meteor.call('aplicaciones.remover', this.props.aplicacion._id);
+  }
+
+  marcarComoLeida( )
+  {
+    Meteor.call('aplicaciones.marcarcomoleida', this.props.aplicacion._id);
+  }
+
+  marcarComoNoLeida( )
+  {
+    Meteor.call('aplicaciones.marcarcomonoleida', this.props.aplicacion._id);
+  }
+
+  renderBotones( )
+  {
+    if(this.props.aplicacion.idPublicador == this.props.currentUser)
+    {
+      if(this.props.aplicacion.aceptada)
+      {
+        return(<div className="card-body">
+          <span className="badge badge-primary badge-pill">Aceptada</span>          
+        </div>);
+
+      }
+      if(this.props.aplicacion.rechazada)
+      {
+        return(<div className="card-body">
+          <span className="badge badge-primary badge-pill">Rechazada</span>          
+        </div>);
+      } 
+
+      return(
+        <div className="card-body">
+          <a href="#" className="btn btn-danger pr-sm-3" onClick={this.aceptarAplicacion}>Aceptar</a>
+          <a href="#" className="btn btn-danger" onClick={this.rechazarAplicacion}>Rechazar</a>
+        </div>
+      );
+
     }
+  }
 
-    aceptarAplicacion() {
-        Meteor.call('aplicaciones.aceptar', this.props.aplicacion._id);
-    }
+  render() {
+    return (
+      <div className="card col-md-4">        
+        <ul className="list-group list-group-flush">
+          <li className="list-group-item"><strong>Nombre Producción: </strong> {this.props.produccion.nombre}</li>
+          <li className="list-group-item"><strong>Descripción: </strong> {this.props.produccion.descripcion}</li>
+          <li className="list-group-item"><strong>Nombre Aplicante: </strong> {this.props.usuario.username}</li>
+        </ul>
 
-    removerAplicacion() {
-        Meteor.call('aplicaciones.remover', this.props.aplicacion._id);
-    }
+        {this.renderBotones()}        
 
-    render() {
-        return (
-            <div className="card itemCard col-sm-5">
-                <div className="card-body">
-                    <h3 className="card-title">Aplicante</h3>
-                </div>
-                <ul className="list-group list-group-flush">
-                    <li className="list-group-item"><strong>Nombre Producción: </strong> {this.props.produccion.nombre}</li>
-                    <li className="list-group-item"><strong>Descripción: </strong> {this.props.produccion.descripcion}</li>
-                    <li className="list-group-item"><strong>Nombre Aplicante: </strong> {this.props.usuario.username}</li>
-                </ul>
-                {/*boton para aceptar una aplicacion*/}
-                {this.props.aplicacion.idPublicador = this.props.currentUser ?
-                    <div className="card-body">
-                        <a href="#" className="btn btn-danger" onClick={this.aceptarAplicacion}>Aceptar aplicacion</a>
-                    </div> : ''}
-                {/*boton para borrar la aplicacion*/}
-                {this.props.aplicacion.idPublicador = this.props.currentUser ?
-                    <div className="card-body">
-                        <a href="#" className="btn btn-danger" onClick={this.removerAplicacion}>Borrar aplicacion</a>
-                    </div> : ''}
-            </div>
-        );
-    }
+        {/*boton para borrar la aplicacion*/}
+        {this.props.aplicacion.idPublicador = this.props.currentUser ?
+          <div className="card-body">
+            <a href="#" className="btn btn-danger" onClick={this.removerAplicacion}>Borrar aplicacion</a>
+   
+            {this.props.aplicacion.leida === false ? 
+              <a href="#" className="btn btn-danger" onClick={this.marcarComoLeida}>Marcar como leída</a>
+              :
+              <a href="#" className="btn btn-danger" onClick={this.marcarComoNoLeida}>Dejar no leída</a>}
+          </div> : ''}
+      </div>
+    );
+  }
 }
+
+AplicantesCard.propTypes = {
+  produccion: PropTypes.object.isRequired,
+  aplicacion: PropTypes.object.isRequired,
+  usuario:PropTypes.object.isRequired,
+  currentUser: PropTypes.string.isRequired
+};

@@ -1,4 +1,4 @@
-import { Meteor } from "meteor/meteor";
+/*import { Meteor } from "meteor/meteor";
 import { Random } from "meteor/random";
 import { Aplicaciones } from "./aplicaciones.js";
 import { assert } from "meteor/practicalmeteor:chai";
@@ -38,4 +38,4 @@ if (Meteor.isServer) {
       });
     });
   });
-}
+}*/
