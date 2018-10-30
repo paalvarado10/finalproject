@@ -26,41 +26,47 @@ class NavBar extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-light bg-light sticky-top">
-        <a className="navbar-brand nav-link hvr-icon-grow" href="/">
-          <i className="fas fa-theater-masks"></i>
+      <nav className="navbar navbar-light bg-light sticky-top" id="minavbar">
+        <a className="navbar-brand nav-link hvr-icon-grow linksnavbar" href="/">
+          <i className="fas fa-theater-masks linksnavbar"></i>
           AdE
         </a>                 
        
         {this.props.currentUser ?
 
-          <div className="row">
+          <div className="row" id="linksnavbar">
 
-            <div className="col nav-item navbar-tab">            
-              <Link className="nav-link hvr-underline-from-center" to="/produccioneslist">Producciones</Link>
+            <div className="col nav-item navbar-tab ">            
+              <Link className="nav-link hvr-underline-from-center linksnavbar" to="/produccioneslist">Producciones</Link>
+              <i className="fas fa-palette iconos"></i>
             </div>
 
             <div className="col nav-item navbar-tab">            
-              <Link className="nav-link hvr-underline-from-center" to="/artistaslist">Artistas</Link>
+              <Link className="nav-link hvr-underline-from-center linksnavbar" to="/artistaslist">Artistas</Link>
+              <i className="fab fa-pied-piper-hat iconos"></i>
             </div> 
 
             <div className="col nav-item navbar-tab">            
-              <Link className="nav-link hvr-underline-from-center" to="/misaplicaciones">Mis aplicaciones</Link>
-              {this.props.misaplicaciones.length > 0 ?
-                <span className="badge badge-primary badge-pill">{this.props.misaplicaciones.length}</span>
-                : ''}
+              <Link className="nav-link hvr-underline-from-center linksnavbar" to="/misaplicaciones">
+                 Aplicaciones</Link>
+              <i className="fas fa-hand-pointer iconos">
+                {this.props.misaplicaciones.length > 0 ?
+                  <span className="badge badge-primary badge-pill">{this.props.misaplicaciones.length}</span>
+                  : ''}</i>
+              
             </div>
 
 
             <div className="col nav-item navbar-tab">            
-              <Link className="nav-link hvr-underline-from-center" to="/misaplicantes">Mis aplicantes</Link>
-              {this.props.aplicantes.length > 0 ?
+              <Link className="nav-link hvr-underline-from-center linksnavbar" to="/misaplicantes">Aplicantes</Link>
+              <i className="fas fa-pen-fancy iconos">{this.props.aplicantes.length > 0 ?
                 <span className="badge badge-primary badge-pill">{this.props.aplicantes.length}</span>
                 : ''}
+              </i>
             </div>
 
             <div className="col nav-item navbar-tab">            
-              <Link className="nav-link hvr-underline-from-center" to="/nuevaproduccion">Agregar producción</Link>
+              <Link className="nav-link hvr-underline-from-center linksnavbar" to="/nuevaproduccion">Agregar producción</Link>
             </div> 
             
             <div className="col nav-item navbar-tab">            
@@ -69,15 +75,18 @@ class NavBar extends Component {
           </div>
 
           :
-          <div className="row">
+          <div className="row">            
             <div className="col nav-item navbar-tab">            
-              <Link className="nav-link hvr-underline-from-center" to="/produccioneslist">Producciones</Link>
+              <Link className="nav-link hvr-underline-from-center linksnavbar" to="/produccioneslist">Producciones</Link>
+              <i className="fas fa-palette iconos"></i>
             </div>             
             <div className="col nav-item navbar-tab">            
-              <Link className="nav-link hvr-underline-from-center" to="/nuevousuario">Registrarse</Link>
+              <Link className="nav-link hvr-underline-from-center linksnavbar" to="/nuevousuario">Registrarse</Link>
+              <i className="fas fa-user-plus iconos"></i>
             </div>
             <div className="col nav-item navbar-tab">            
-              <Link className="nav-link hvr-underline-from-center" to="/iniciarsesion">Iniciar sesión</Link>
+              <Link className="nav-link hvr-underline-from-center linksnavbar" to="/iniciarsesion">Iniciar</Link>
+              <i className="fas fa-sign-in-alt iconos"></i>
             </div>
           </div>
           

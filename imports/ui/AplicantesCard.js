@@ -16,6 +16,7 @@ export default class AplicantesCard extends Component {
     this.rechazarAplicacion = this.rechazarAplicacion.bind(this);
     this.marcarComoLeida = this.marcarComoLeida.bind(this);
     this.marcarComoNoLeida = this.marcarComoNoLeida.bind(this);
+    this.handleMasInformacionArtista = this.handleMasInformacionArtista.bind(this);
   }
 
   aceptarAplicacion() {
@@ -39,6 +40,11 @@ export default class AplicantesCard extends Component {
   {
     Meteor.call('aplicaciones.marcarcomonoleida', this.props.aplicacion._id);
   }
+
+  handleMasInformacionArtista()
+  {
+    return this.props.handleSeleccionDetail(this.props.aplicacion.idAplicante);
+  }   
 
   renderBotones( )
   {
@@ -74,7 +80,8 @@ export default class AplicantesCard extends Component {
         <ul className="list-group list-group-flush">
           <li className="list-group-item"><strong>Nombre Producción: </strong> {this.props.produccion.nombre}</li>
           <li className="list-group-item"><strong>Descripción: </strong> {this.props.produccion.descripcion}</li>
-          <li className="list-group-item"><strong>Nombre Aplicante: </strong> {this.props.usuario.username}</li>
+          <li className="list-group-item"><strong>Nombre Aplicante: </strong>{this.props.usuario.username}</li>          
+          <li className="list-group-item"><strong>Rol aplicado: </strong>{this.props.aplicacion.rol.rol}</li>
         </ul>
 
         {this.renderBotones()}        
@@ -82,8 +89,7 @@ export default class AplicantesCard extends Component {
         {/*boton para borrar la aplicacion*/}
         {this.props.aplicacion.idPublicador = this.props.currentUser ?
           <div className="card-body">
-            <a href="#" className="btn btn-danger" onClick={this.removerAplicacion}>Borrar aplicacion</a>
-   
+              
             {this.props.aplicacion.leida === false ? 
               <a href="#" className="btn btn-danger" onClick={this.marcarComoLeida}>Marcar como leída</a>
               :
@@ -98,5 +104,6 @@ AplicantesCard.propTypes = {
   produccion: PropTypes.object.isRequired,
   aplicacion: PropTypes.object.isRequired,
   usuario:PropTypes.object.isRequired,
-  currentUser: PropTypes.string.isRequired
+  currentUser: PropTypes.string.isRequired,
+  handleSeleccionDetail:PropTypes.func
 };

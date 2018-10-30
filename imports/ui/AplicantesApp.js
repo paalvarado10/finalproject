@@ -6,17 +6,20 @@ import PropTypes from 'prop-types';
 import AplicantesCard from './AplicantesCard.js';
 import { Producciones } from '../api/producciones.js';
 import NavBar from './NavBar.js';
+import ArtistaDetail from './ArtistaDetail.js';
 
 class AplicantesApp extends Component {
 
   constructor(props) {
     super(props);
 
-
     this.state = {
-      redirect: false
+      mostrarDetail:undefined
     };
+
     this.renderAplicantes = this.renderAplicantes.bind(this);
+    this.handleSeleccionDetail = this.handleSeleccionDetail.bind(this);
+    this.handleCerrarDetail = this.handleCerrarDetail.bind(this);
   }
 
   renderAplicantes() {
@@ -24,7 +27,7 @@ class AplicantesApp extends Component {
     let idUser = this.props.currentUser && this.props.currentUser._id;
 
     //se filtran las aplicaciones a las que el id publicador sea igual al mio
-    filteredAplicaciones = filteredAplicaciones.filter(aplicacion => aplicacion.idPublicador == idUser);
+    filteredAplicaciones = Aplicaciones.find({idPublicador:Meteor.userId()}).fetch();
 
     return filteredAplicaciones.map((aplicacion) => {
              
@@ -38,20 +41,49 @@ class AplicantesApp extends Component {
           aplicacion={aplicacion}
           currentUser={this.props.currentUser && this.props.currentUser._id}
           produccion={Producciones.findOne({_id:aplicacion.idProduccion})}
+          handleSeleccionDetail={this.handleSeleccionDetail}
         />
       );
     });
+  }
+
+
+  handleSeleccionDetail(artistaId)
+  {
+    console.log('Selecciono el artista con id: ', artistaId);
+    this.setState({
+      mostrarDetail:artistaId      
+    });
+  }
+
+  handleCerrarDetail()
+  {
+    this.setState({
+      mostrarDetail:undefined      
+    });
+  }
+
+  renderDetailArtista()
+  {
+    if(this.state.mostrarDetail)
+    {
+
+      return (<ArtistaDetail 
+        artista={Meteor.users.findOne({_id:this.state.mostrarDetail})}
+        handleCerrarDetail={this.handleCerrarDetail}/>        
+      );
+    }
   }
 
   render() {
     return (
       <div>
         <NavBar />
-        <div className="container pt-sm-3">        
+        <div className="container pt-sm-3">                  
           {/*aplicaciones reenderizadas*/}
           <div className="card-deck">
             {this.renderAplicantes()}
-          </div>
+          </div>         
         </div>
       </div>
     );

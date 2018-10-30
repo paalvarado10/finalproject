@@ -25,7 +25,7 @@ class ProduccionDetail extends Component
     console.log('Nueva aplicacion en proceso prodNombre:',this.props.produccion.nombre);
     console.log('Nueva aplicacion en proceso rol:', rol);
 
-    Meteor.call('aplicaciones.insert', Meteor.userId(), this.props.produccion._id, this.props.produccion.nombre, rol, (error, result) => {
+    Meteor.call('aplicaciones.insert', this.props.produccion.usuario, this.props.produccion._id, this.props.produccion.nombre, rol, (error, result) => {
 
       if(error)
       {

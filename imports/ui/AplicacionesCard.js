@@ -26,12 +26,45 @@ export default class AplicacionesCard extends Component {
     Meteor.call('aplicaciones.marcarcomonoleida', this.props.aplicacion._id);
   }
 
+  renderAceptado( )
+  {
+    if(this.props.aplicacion.idAplicante == this.props.currentUser)
+    {
+      if(this.props.aplicacion.aceptada)
+      {
+        return(
+          <div>
+            <span className="badge badge-primary badge-pill">Aceptada</span>  
+            <br/>
+          </div>        
+        );
+
+      }
+      if(this.props.aplicacion.rechazada)
+      {
+        return(
+          <div>
+            <span className="badge badge-primary badge-pill">Rechazada</span> 
+            
+          </div>        
+        );
+      } 
+      return(
+        <div>
+          <span className="badge badge-primary badge-pill">En espera</span> 
+          
+        </div>        
+      );
+    }
+  }
 
   render() {
     return (
       <div className="card col-md-4">            
-        <ul className="list-group list-group-flush">
-          <li className="list-group-item"><strong>Nombre: </strong> {this.props.produccion.nombre}</li>
+        <ul className="list-group list-group-flush">        
+          <li className="list-group-item"><strong>Estado solicitud: </strong> {this.renderAceptado()}</li> 
+          <li className="list-group-item"><strong>Nombre: </strong> {this.props.produccion.nombre}</li>          
+          <li className="list-group-item"><strong>Rol aplicado: </strong> {this.props.aplicacion.rol.rol}</li>
           <li className="list-group-item"><strong>Descripción: </strong> {this.props.produccion.descripcion}</li>
           <li className="list-group-item"><strong>Fecha: </strong>{this.props.produccion.fecha}</li>
           <li className="list-group-item"><strong>Hora: </strong>{this.props.produccion.hora}</li>

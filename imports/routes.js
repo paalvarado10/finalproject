@@ -10,6 +10,7 @@ import AplicantesApp from './ui/AplicantesApp.js';
 import ArtistasList from './ui/ArtistasList.js';
 import MisAplicacionesApp from './ui/MisAplicacionesApp.js';
 import ProduccionesList from './ui/ProduccionesList.js';
+import About from './ui/About.js';
 
 export const AppRoutes = () => (
   <Router>
@@ -29,6 +30,8 @@ export const AppRoutes = () => (
       <Route exact path='/misaplicaciones' component={MisAplicacionesApp}/>
 
       <Route exact path='/produccioneslist' component={ProduccionesList}/>
+
+      <Route exact path='/about' component={About}/>
     </div>
   </Router>
 );

@@ -25,7 +25,7 @@ class MisAplicacionesApp extends Component {
     console.log('idUser', idUser);
 
     //se filtran las aplicaciones a las que el id aplicante sea igual al mio
-    filteredAplicaciones = filteredAplicaciones.filter(aplicacion => aplicacion.idAplicante == idUser);
+    filteredAplicaciones = Aplicaciones.find({idAplicante:Meteor.userId()}).fetch();
 
     return filteredAplicaciones.map((aplicacion) => {
    

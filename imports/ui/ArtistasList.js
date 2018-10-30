@@ -6,6 +6,7 @@ import ItemArtista from './ItemArtista.js';
 import ArtistaDetail from './ArtistaDetail.js';
 import PropTypes from 'prop-types';
 import NavBar from './NavBar.js';
+import { Artistas } from '../api/artistas.js';
 
 
 class ArtistasList extends Component {
@@ -62,7 +63,7 @@ class ArtistasList extends Component {
     {
 
       return (<ArtistaDetail 
-        artista={Meteor.users.findOne({_id:this.state.mostrarDetail})}
+        artista={Artistas.findOne({_id:this.state.mostrarDetail})}
         handleCerrarDetail={this.handleCerrarDetail}/>        
       );
     }
@@ -91,8 +92,10 @@ ArtistasList.propTypes = {
 
 
 export default withTracker(() => {
+
+  Meteor.subscribe('artistas');
   return {
-    usuarios: Meteor.users.find({}).fetch()
+    usuarios: Artistas.find({}).fetch()
   };
 })(ArtistasList);
 
