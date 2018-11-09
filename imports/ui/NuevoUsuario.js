@@ -47,8 +47,11 @@ class NuevoUsuario extends Component {
           error:'',
           redirectSignIn: !this.state.redirectSignIn
         });
+
+        Meteor.call('artistas.insert', Meteor.userId(), newUser.profile);   
       }
-    });   
+    });
+
 
   }
 

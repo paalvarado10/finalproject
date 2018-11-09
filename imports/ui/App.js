@@ -20,10 +20,8 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <NavBar />
-        <ProduccionesList />
-          
+      <div>        
+        <ProduccionesList />          
       </div>
     );
   }  
