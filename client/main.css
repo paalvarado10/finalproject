@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css?family=Didact+Gothic|Ubuntu');
+
+body {
+  overflow-x: hidden;
+  font-family: 'Didact Gothic', sans-serif;
+}
+
+p {
+  line-height: 1.75;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  font-family: 'Ubuntu', sans-serif;
+ }
+
+.btn {
+  font-family: 'Didact Gothic', sans-serif;
+  font-weight: 700;
+}
+
+#minavbar{
+  background: #6635E8 !important;  
+}
+
+.nav-item{
+  color: #ffffff !important;
+  text-align: center !important;
+}
+
+.linksnavbar{
+  color: #ffffff !important;  
+  text-align: center !important;
+}
+
+.iconos{
+    fill: #ffffff !important;
+}
+
+.fa {
+    width: 18px;
+    text-align: center;
+}
+

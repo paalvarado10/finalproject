@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
-import { Mongo } from 'meteor/mongo';
 
 import { Producciones } from '../api/producciones.js';
 
 import ItemProduccion from './ItemProduccion.js';
 import ProduccionDetail from './ProduccionDetail.js';
 import PropTypes from 'prop-types';
+import NavBar from './NavBar.js';
 
 
 class ProduccionesList extends Component {
@@ -27,10 +27,21 @@ class ProduccionesList extends Component {
   renderProducciones( )
   {
     return this.props.producciones.map((produc)=>{
-      return (
+
+      if(this.state.mostrarDetail)
+      {
+        if(this.state.mostrarDetail === produc._id)
+        {
+          return <div key={produc._id}></div>;
+        }
+      }
+      
+      return (        
         <div key={produc._id} className="col-md-3">
           <ItemProduccion produccion={produc} handleSeleccionDetail={this.handleSeleccionDetail}/>
-        </div>);
+        </div>
+      );      
+      
     });
   }
 
@@ -63,8 +74,9 @@ class ProduccionesList extends Component {
 
   render() {
     return (
-      <div>        
-        <div className="container">
+      <div>  
+        <NavBar />      
+        <div className="container pt-sm-3">
           {this.renderDetail()}
           <div className="row">
             {this.renderProducciones()}  
