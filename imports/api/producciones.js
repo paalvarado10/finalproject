@@ -5,7 +5,7 @@ import { check } from 'meteor/check';
 export const Producciones = new Mongo.Collection('producciones');
 
 if (Meteor.isServer) {
-  // Se publica la coleccion de companies
+  // Se publica la coleccion de producciones
   Meteor.publish('producciones', function produccionesPublication() {
     return Producciones.find();
   });

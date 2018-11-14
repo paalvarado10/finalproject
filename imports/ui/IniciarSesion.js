@@ -53,7 +53,7 @@ export default class Login extends Component {
   {
     if (this.state.redirectAppMain) {
       return <Redirect to={{
-        pathname: '/'       
+        pathname: '/produccioneslist'       
       }} />;
     } 
 

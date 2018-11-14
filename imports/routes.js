@@ -11,11 +11,12 @@ import ArtistasList from './ui/ArtistasList.js';
 import MisAplicacionesApp from './ui/MisAplicacionesApp.js';
 import ProduccionesList from './ui/ProduccionesList.js';
 import About from './ui/About.js';
+import Home from './ui/Home.js';
 
 export const AppRoutes = () => (
   <Router>
     <div>
-      <Route exact path='/' component={App}/>
+      <Route exact path='/' component={Home}/>
       
       <Route exact path='/nuevaproduccion' component={RegistrarProduccion}/>
 

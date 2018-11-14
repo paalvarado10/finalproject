@@ -76,7 +76,7 @@ export default class AplicantesCard extends Component {
 
   render() {
     return (
-      <div className="card col-md-4">        
+      <div className="card">        
         <ul className="list-group list-group-flush">
           <li className="list-group-item"><strong>Nombre Producción: </strong> {this.props.produccion.nombre}</li>
           <li className="list-group-item"><strong>Descripción: </strong> {this.props.produccion.descripcion}</li>

@@ -60,7 +60,7 @@ export default class AplicacionesCard extends Component {
 
   render() {
     return (
-      <div className="card col-md-4">            
+      <div className="card">            
         <ul className="list-group list-group-flush">        
           <li className="list-group-item"><strong>Estado solicitud: </strong> {this.renderAceptado()}</li> 
           <li className="list-group-item"><strong>Nombre: </strong> {this.props.produccion.nombre}</li>          

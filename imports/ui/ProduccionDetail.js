@@ -12,7 +12,8 @@ class ProduccionDetail extends Component
 
     this.state = {
       error:'',
-      aplicaciones:[]
+      aplicaciones:[],
+      aplicacionNoRealizada:false
     };
 
     this.handleAplicar = this.handleAplicar.bind(this);
@@ -39,7 +40,8 @@ class ProduccionDetail extends Component
         aplicaciones.push(rol.key);
         this.setState({
           error:'',
-          aplicaciones:aplicaciones         
+          aplicaciones:aplicaciones,
+          aplicacionNoRealizada:true
         });
       }
 
@@ -57,7 +59,7 @@ class ProduccionDetail extends Component
 
           <span className="badge badge-primary badge-pill">Cantidad requerida: {rol.cantArtistas}</span>
 
-          {this.verificarAplicacion(rol) ? '' : <button type="button" className="btn btn-primary" onClick={()=>this.handleAplicar(rol)}>Aplicar</button>} 
+          {this.state.aplicacionNoRealizada ? '' : <button type="button" className="btn btn-primary" onClick={()=>this.handleAplicar(rol)}>Aplicar</button>} 
           
         </li>
       );

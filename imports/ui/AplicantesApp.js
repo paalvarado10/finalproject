@@ -35,6 +35,7 @@ class AplicantesApp extends Component {
       let usuario = Meteor.users.findOne(aplicacion.idPublicador);
         
       return (
+      <div key={aplicacion._id} className = "col-md-4">
         <AplicantesCard
           key={aplicacion._id}
           usuario={usuario}
@@ -43,6 +44,7 @@ class AplicantesApp extends Component {
           produccion={Producciones.findOne({_id:aplicacion.idProduccion})}
           handleSeleccionDetail={this.handleSeleccionDetail}
         />
+        </div>
       );
     });
   }
@@ -97,8 +99,8 @@ AplicantesApp.propTypes = {
 
 export default withTracker(() => {
   //se suscribe a la coleccion aplicaciones y producciones
-  Meteor.subscribe('aplicaciones');
   Meteor.subscribe('producciones');
+  Meteor.subscribe('aplicaciones');
 
   //se ordena del ultimo creado al mas viejo
   return {

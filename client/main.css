@@ -47,3 +47,11 @@ h6 {
     text-align: center;
 }
 
+.card {
+  margin-top:3em;
+}
+
+.btn{
+  margin-right:1em;
+  margin-bottom:1em;
+}

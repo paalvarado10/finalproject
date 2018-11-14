@@ -28,17 +28,19 @@ class MisAplicacionesApp extends Component {
     filteredAplicaciones = Aplicaciones.find({idAplicante:Meteor.userId()}).fetch();
 
     return filteredAplicaciones.map((aplicacion) => {
-   
-      console.log('aplicacion', aplicacion);
+      console.log('aplicacion', aplicacion.idProduccion);
       //se busca la produccion en el prop de producciones que su idProduccion sea igual al de la aplicacion actual
-      console.log('produccion', Producciones.findOne({_id:aplicacion.idProduccion}));
-      return (        
+      console.log('produccion', Producciones.find({}).fetch());
+
+      return (
+        <div key = {aplicacion._id} className = "col-md-4">        
         <AplicacionesCard
           key={aplicacion._id}
           produccion={Producciones.findOne({_id:aplicacion.idProduccion})}
           aplicacion={aplicacion}
           currentUser={Meteor.userId()}
         />
+        </div>
         
       );
     });
@@ -66,13 +68,14 @@ MisAplicacionesApp.propTypes = {
 
 export default withTracker(() => {
   //se suscribe a la coleccion aplicaciones y producciones
-  Meteor.subscribe('aplicaciones');
-  Meteor.subscribe('producciones');
+  Meteor.subscribe('producciones').ready();
+  Meteor.subscribe('aplicaciones').ready();
+
 
   //se ordena del ultimo creado al mas viejo
   return {
-    aplicaciones: Aplicaciones.find({}, { sort: { createdAt: -1 } }).fetch(),
     producciones: Producciones.find({}, { sort: { createdAt: -1 } }).fetch(),
+    aplicaciones: Aplicaciones.find({}, { sort: { createdAt: -1 } }).fetch(),
     currentUser: Meteor.user()
   };
 })(MisAplicacionesApp);
