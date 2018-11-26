@@ -14,13 +14,26 @@ if (Meteor.isServer) {
 Meteor.methods({
 
   //se inserta una nueva produccion. 
-  'artistas.insert'(idArtista, profile) {
+  'artistas.insert'(idArtista,profile,firstName,lastName,headline,industry,location,numConnections,numPositions) {
 
     check(idArtista, String);
 
     Artistas.insert({
       idArtista,
-      profile      
+      profile,
+      firstName,
+      lastName,
+      headline,
+      industry,
+      location,
+      numConnections,
+      numPositions     
     });
+  },
+  'artistas.linkedInUpdate'(idArtista,firstName,lastName,headline,industry,location,numConnections,numPositions) {
+
+    check(idArtista, String);
+
+    Artistas.update(idArtista, { $set: { firstName: firstName, lastName:lastName, headline:headline, industry:industry, location:location, numConnections:numConnections, numPositions:numPositions} });
   }
 });

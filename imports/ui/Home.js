@@ -87,7 +87,7 @@ export default class App extends Component {
               <div className="col-md-6">
                 <div className="info">
                   <div className="icon icon-danger">
-                  <i class="far fa-id-card" aria-hidden="true"></i>
+                  <i className="far fa-id-card" aria-hidden="true"></i>
                   </div>
                   <div className="description">
                     <h4 className="info-title">Ver artistas</h4>

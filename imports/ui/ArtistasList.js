@@ -72,7 +72,7 @@ class ArtistasList extends Component {
   render() {
     return (
       <div>  
-        <NavBar />      
+        <NavBar />
         <div className="container pt-sm-3">
           {this.renderDetail()}         
           <div className="card-deck">
