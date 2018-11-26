@@ -58,9 +58,7 @@ class ProduccionDetail extends Component
           {rol.rol}
 
           <span className="badge badge-primary badge-pill">Cantidad requerida: {rol.cantArtistas}</span>
-
-          {this.state.aplicacionNoRealizada ? '' : <button type="button" className="btn btn-primary" onClick={()=>this.handleAplicar(rol)}>Aplicar</button>} 
-          
+          {Meteor.userId() == null || this.state.aplicacionNoRealizada? '' : <button type="button" className="btn btn-primary" onClick={()=>this.handleAplicar(rol)}>Aplicar</button>} 
         </li>
       );
 
