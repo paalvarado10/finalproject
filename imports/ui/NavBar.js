@@ -121,15 +121,12 @@ class NavBar extends Component {
             </div>
 
             <div className="col nav-item navbar-tab">
-              <Link className="nav-link hvr-underline-from-center linksnavbar" to="/misaplicaciones">
-                Aplicaciones</Link>
-              <i className="fas fa-hand-pointer iconos">
-                {this.props.misaplicaciones.length > 0 ?
+              <Link className="nav-link hvr-underline-from-center linksnavbar" to="/misaplicaciones">Aplicaciones</Link>
+              <i className="fas fa-hand-pointer iconos">{this.props.misaplicaciones.length > 0 ?
                   <span className="badge badge-primary badge-pill">{this.props.misaplicaciones.length}</span>
-                  : ''}</i>
-
+                  : ''}
+              </i>
             </div>
-
 
             <div className="col nav-item navbar-tab">
               <Link className="nav-link hvr-underline-from-center linksnavbar" to="/misaplicantes">Aplicantes</Link>

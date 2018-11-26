@@ -14,17 +14,40 @@ class AplicantesApp extends Component {
     super(props);
 
     this.state = {
-      mostrarDetail:undefined
+      mostrarDetail:undefined,
+      mostrar:false
     };
 
     this.renderAplicantes = this.renderAplicantes.bind(this);
     this.handleSeleccionDetail = this.handleSeleccionDetail.bind(this);
     this.handleCerrarDetail = this.handleCerrarDetail.bind(this);
+    this.componentDidUpdate = this.componentDidUpdate.bind(this);
+    this.cambiarMostrar = this.cambiarMostrar.bind(this);
+  }
+
+  componentDidUpdate()
+  {
+    console.log("update 1")
+    if(Producciones.find({}).fetch().length !== 0)
+    {
+      console.log("update 2")
+
+        this.cambiarMostrar();
+    }
+  }
+
+  cambiarMostrar()
+  {
+    if(this.state.mostrar == false)
+    {
+      this.setState({mostrar:true});
+      console.log(this.state.mostrar);
+      console.log("hue");
+    }
   }
 
   renderAplicantes() {
     let filteredAplicaciones = this.props.aplicaciones;
-    let idUser = this.props.currentUser && this.props.currentUser._id;
 
     //se filtran las aplicaciones a las que el id publicador sea igual al mio
     filteredAplicaciones = Aplicaciones.find({idPublicador:Meteor.userId()}).fetch();
@@ -80,11 +103,11 @@ class AplicantesApp extends Component {
   render() {
     return (
       <div>
-        <NavBar />
+        <NavBar/>
         <div className="container pt-sm-3">                  
           {/*aplicaciones reenderizadas*/}
           <div className="card-deck">
-            {this.renderAplicantes()}
+            {this.state.mostrar?this.renderAplicantes():''}
           </div>         
         </div>
       </div>
@@ -99,11 +122,12 @@ AplicantesApp.propTypes = {
 
 export default withTracker(() => {
   //se suscribe a la coleccion aplicaciones y producciones
-  Meteor.subscribe('producciones');
-  Meteor.subscribe('aplicaciones');
+  Meteor.subscribe('producciones').ready();
+  Meteor.subscribe('aplicaciones').ready();
 
   //se ordena del ultimo creado al mas viejo
   return {
+    producciones: Producciones.find({}, { sort: { createdAt: -1 } }).fetch(), 
     aplicaciones: Aplicaciones.find({}, { sort: { createdAt: -1 } }).fetch(),
     currentUser: Meteor.user()
   };

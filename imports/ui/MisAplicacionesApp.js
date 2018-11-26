@@ -13,12 +13,28 @@ class MisAplicacionesApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      redirect: false
+      mostrar:false
     };
     this.renderAplicaciones = this.renderAplicaciones.bind(this);
+    this.cambiarMostrar = this.cambiarMostrar.bind(this);
+    this.componentDidUpdate = this.componentDidUpdate.bind(this);
   }
 
+  cambiarMostrar()
+  {
+    if(this.state.mostrar == false)
+    {
+      this.setState({mostrar:true});
+    }
+  }
 
+  componentDidUpdate()
+  {
+    if(Producciones.find({}).fetch().length !== 0)
+    {
+        this.cambiarMostrar();
+    }
+  }
   renderAplicaciones() {
     let filteredAplicaciones = this.props.aplicaciones;
     let idUser = this.props.currentUser && this.props.currentUser._id;
@@ -41,7 +57,6 @@ class MisAplicacionesApp extends Component {
           currentUser={Meteor.userId()}
         />
         </div>
-        
       );
     });
   }
@@ -52,7 +67,7 @@ class MisAplicacionesApp extends Component {
         <NavBar />             
         <div className="container pt-sm-3">          
           <div className="card-deck">
-            {this.renderAplicaciones()}
+            {this.state.mostrar?this.renderAplicaciones():''}
           </div>
         </div>
       </div>
