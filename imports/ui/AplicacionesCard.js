@@ -78,7 +78,7 @@ export default class AplicacionesCard extends Component {
         {this.props.aplicacion.idAplicante = this.props.currentUser ?
           <div className="card-body">
             <a href="#" className="btn btn-danger" onClick={this.removerAplicacion}>Borrar aplicacion</a>
-            {this.props.aplicacion.leida === false ? 
+            {this.props.aplicacion.leidaAplicante === false ? 
               <a href="#" className="btn btn-danger" onClick={this.marcarComoLeida}>Marcar como leída</a>
               :
               <a href="#" className="btn btn-danger" onClick={this.marcarComoNoLeida}>Dejar no leída</a>

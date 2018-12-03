@@ -80,17 +80,16 @@ export default class AplicantesCard extends Component {
         <ul className="list-group list-group-flush">
           <li className="list-group-item"><strong>Nombre Producción: </strong> {this.props.produccion.nombre}</li>
           <li className="list-group-item"><strong>Descripción: </strong> {this.props.produccion.descripcion}</li>
-          <li className="list-group-item"><strong>Nombre Aplicante: </strong>{this.props.usuario.username}</li>          
+          <li className="list-group-item"><strong>Nombre Aplicante: </strong>{this.props.aplicacion.usernameAplicante}</li>          
           <li className="list-group-item"><strong>Rol aplicado: </strong>{this.props.aplicacion.rol.rol}</li>
         </ul>
 
         {this.renderBotones()}        
 
-        {/*boton para borrar la aplicacion*/}
         {this.props.aplicacion.idPublicador = this.props.currentUser ?
           <div className="card-body">
               
-            {this.props.aplicacion.leida === false ? 
+            {this.props.aplicacion.leidaPublicador === false ? 
               <a href="#" className="btn btn-danger" onClick={this.marcarComoLeida}>Marcar como leída</a>
               :
               <a href="#" className="btn btn-danger" onClick={this.marcarComoNoLeida}>Dejar no leída</a>}

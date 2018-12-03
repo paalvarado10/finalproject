@@ -27,12 +27,12 @@ class AplicantesApp extends Component {
 
   componentDidUpdate()
   {
-    console.log("update 1")
+    console.log('update 1');
     if(Producciones.find({}).fetch().length !== 0)
     {
-      console.log("update 2")
+      console.log('update 2');
 
-        this.cambiarMostrar();
+      this.cambiarMostrar();
     }
   }
 

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 //import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
-//import { Aplicaciones } from '../api/aplicaciones.js';
+import { Aplicaciones } from '../api/aplicaciones.js';
 
 class ProduccionDetail extends Component 
 {
@@ -17,6 +17,8 @@ class ProduccionDetail extends Component
     };
 
     this.handleAplicar = this.handleAplicar.bind(this);
+
+    this.verificarUnicaAplicacion = this.verificarUnicaAplicacion.bind(this);
   }
 
   handleAplicar(rol)
@@ -52,17 +54,32 @@ class ProduccionDetail extends Component
   {
     const roles = this.props.produccion.roles;
 
+    const previaAplicacion = this.state.aplicacionNoRealizada || this.verificarUnicaAplicacion();
+
     return roles.map((rol)=>{
       return (
         <li key={rol.key} className="list-group-item d-flex justify-content-between align-items-center">
           {rol.rol}
 
           <span className="badge badge-primary badge-pill">Cantidad requerida: {rol.cantArtistas}</span>
-          {Meteor.userId() == null || this.state.aplicacionNoRealizada? '' : <button type="button" className="btn btn-primary" onClick={()=>this.handleAplicar(rol)}>Aplicar</button>} 
+          { Meteor.userId() == null || 
+            this.props.produccion.usuario == Meteor.userId() ||
+            previaAplicacion ? '' : 
+            <button type="button" className="btn btn-primary" onClick={()=>this.handleAplicar(rol)}>Aplicar</button>} 
         </li>
       );
 
     });
+  }
+
+  verificarUnicaAplicacion( )
+  {
+    const previaAplicacion = Aplicaciones.findOne({idProduccion:this.props.produccion._id, 
+      idAplicante:Meteor.userId()});
+
+    console.log('previaApp', previaAplicacion);
+
+    return previaAplicacion !== undefined; 
   }
 
   verificarAplicacion(rol)

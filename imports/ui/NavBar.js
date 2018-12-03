@@ -44,8 +44,8 @@ class NavBar extends Component {
 
   cargarDatos() {
     fetch('https://api.linkedin.com/v1/people/~:(public-profile-url,id,positions,specialties,first-name,last-name,headline,num-connections,location,industry,summary,picture-url)?format=json&oauth2_access_token=' + this.state.access, {method: 'GET'})
-    .then(response => response.json())
-    .then(data => {console.log(data);this.cargaMongo(data)})
+      .then(response => response.json())
+      .then(data => {console.log(data);this.cargaMongo(data);});
   }
 
   cargaMongo(data) {
@@ -79,12 +79,12 @@ class NavBar extends Component {
     var c = url.searchParams.get("code");
 
     if (c != null) {
-      this.setState({ RegistradoLinkedIn: true })
+      this.setState({ RegistradoLinkedIn: true });
 
       fetch('https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&code=' + c + '&redirect_uri=http://localhost:3000&client_id=78thawjoan2g2s&client_secret=SstD4bmgYig2cTV0', { 'Access-Control-Allow-Origin': '*', method: 'POST' })
         .then(response => response.json())
         .then(data => this.setState({ access: data.access_token }))
-        .then(data => this.cargarDatos())
+        .then(data => this.cargarDatos());
     }
 
     console.log(c);
@@ -182,8 +182,8 @@ export default withTracker(() => {
 
   return {
     usuarios: Artistas.find({}).fetch(),
-    aplicantes: Aplicaciones.find({ $and: [{ idPublicador: Meteor.userId() }, { leida: false }] }).fetch(),
-    misaplicaciones: Aplicaciones.find({ $and: [{ idAplicante: Meteor.userId() }, { leida: false }] }).fetch(),
+    aplicantes: Aplicaciones.find({ $and: [{ idPublicador: Meteor.userId() }, { leidaPublicador: false }] }).fetch(),
+    misaplicaciones: Aplicaciones.find({ $and: [{ idAplicante: Meteor.userId() }, { leidaAplicante: false }] }).fetch(),
     currentUser: Meteor.user()
   };
 })(NavBar);

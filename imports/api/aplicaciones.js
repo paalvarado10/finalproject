@@ -29,7 +29,8 @@ Meteor.methods({
       rol,
       aceptada: false,
       rechazada:false,
-      leida:false,
+      leidaAplicante:false,
+      leidaPublicador:false,
       createdAt: new Date(),
       idAplicante: this.userId,
       usernameAplicante: Meteor.users.findOne(this.userId).username
@@ -54,7 +55,7 @@ Meteor.methods({
 
     const aplicacion = Aplicaciones.findOne(aplicacionId);
 
-    if (aplicacion.idAplicante !== this.userId) {
+    if (aplicacion.idPublicador !== this.userId) {
       throw new Meteor.Error('not-authorized');
     }
     Aplicaciones.update(aplicacionId, { $set: { aceptada: true } });
@@ -66,7 +67,7 @@ Meteor.methods({
 
     const aplicacion = Aplicaciones.findOne(aplicacionId);
 
-    if (aplicacion.idAplicante !== this.userId) {
+    if (aplicacion.idPublicador !== this.userId) {
       throw new Meteor.Error('not-authorized');
     }
     Aplicaciones.update(aplicacionId, { $set: { rechazada: true } });
@@ -76,11 +77,27 @@ Meteor.methods({
     check(aplicacionId, String);
 
     const aplicacion = Aplicaciones.findOne(aplicacionId);
+    /*
+    console.log('User id', this.userId);
+    console.log('idAplicante', aplicacion.idAplicante);
+    console.log('idPublicador', aplicacion.idPublicador);
+    */
+    const esAplicante = aplicacion.idAplicante == this.userId;
+    const esPublicador = aplicacion.idPublicador == this.userId;
 
-    if (aplicacion.idAplicante !== this.userId) {
+    if (!esAplicante && !esPublicador) {
       throw new Meteor.Error('not-authorized');
     }
-    Aplicaciones.update(aplicacionId, { $set: { leida: true } });
+
+    if(esAplicante)
+    {
+      Aplicaciones.update(aplicacionId, { $set: { leidaAplicante: true } });
+    }
+    else
+    {
+      Aplicaciones.update(aplicacionId, { $set: { leidaPublicador: true } });
+    }
+
   },
 
   'aplicaciones.marcarcomonoleida'(aplicacionId) {
@@ -88,10 +105,21 @@ Meteor.methods({
 
     const aplicacion = Aplicaciones.findOne(aplicacionId);
 
-    if (aplicacion.idAplicante !== this.userId) {
+    const esAplicante = aplicacion.idAplicante == this.userId;
+    const esPublicador = aplicacion.idPublicador == this.userId;
+
+    if (!esAplicante && !esPublicador) {
       throw new Meteor.Error('not-authorized');
     }
-    Aplicaciones.update(aplicacionId, { $set: { leida: false } });
+
+    if(esAplicante)
+    {
+      Aplicaciones.update(aplicacionId, { $set: { leidaAplicante: false } });
+    }
+    else
+    {
+      Aplicaciones.update(aplicacionId, { $set: { leidaPublicador: false } });
+    }
   }
 
 });
