@@ -16,7 +16,8 @@ class ProduccionesList extends Component {
     super(props);
 
     this.state = {
-      mostrarDetail:undefined
+      mostrarDetail:undefined,
+      rowNumberDetail:1
     };
 
 
@@ -26,37 +27,66 @@ class ProduccionesList extends Component {
 
   renderProducciones( )
   {
-    return this.props.producciones.map((produc)=>{
+    var prodTemp = undefined;
+    return this.props.producciones.map((produc,i)=>{
 
-      if(this.state.mostrarDetail)
+      const nRow = Math.ceil((i+1)/4);
+
+      if(this.state.mostrarDetail && this.state.rowNumberDetail === nRow)
       {
+        if((i+1)%4 === 1)
+        {
+          prodTemp = produc;
+          return (
+            <div key={produc._id} className = "col-md-12">
+              <ProduccionDetail 
+                produccion={Producciones.findOne({_id:this.state.mostrarDetail})}
+                handleCerrarDetail={this.handleCerrarDetail}/>
+            </div>
+          );
+
+        }
+
         if(this.state.mostrarDetail === produc._id)
         {
-          return <div key={produc._id}></div>;
+          return (
+            <div key={prodTemp._id} className="col-md-3">
+              <ItemProduccion 
+                produccion={prodTemp} 
+                handleSeleccionDetail={this.handleSeleccionDetail}
+                rowNumber={nRow}/>
+            </div>
+          );
+
         }
       }
       
       return (        
         <div key={produc._id} className="col-md-3">
-          <ItemProduccion produccion={produc} handleSeleccionDetail={this.handleSeleccionDetail}/>
+          <ItemProduccion 
+            produccion={produc} 
+            handleSeleccionDetail={this.handleSeleccionDetail}
+            rowNumber={nRow}/>
         </div>
       );      
       
     });
   }
 
-  handleSeleccionDetail(produccionId)
+  handleSeleccionDetail(produccionId, rowNumber)
   {
     console.log('Selecciono la produccion con id: ', produccionId);
     this.setState({
-      mostrarDetail:produccionId      
+      mostrarDetail:produccionId,
+      rowNumberDetail:rowNumber      
     });
   }
 
   handleCerrarDetail()
   {
     this.setState({
-      mostrarDetail:undefined      
+      mostrarDetail:undefined,
+      rowNumberDetail:1      
     });
   }
 
@@ -76,8 +106,8 @@ class ProduccionesList extends Component {
     return (
       <div>  
         <NavBar />      
-        <div className="container pt-sm-3">
-          {this.renderDetail()}
+        <div className="container pt-sm-3">         
+          
           <div className="row">
             {this.renderProducciones()}  
           </div>        

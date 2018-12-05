@@ -16,7 +16,7 @@ class ItemProduccion extends Component
 
   handleMasInformacion()
   {
-    return this.props.handleSeleccionDetail(this.props.produccion._id);
+    return this.props.handleSeleccionDetail(this.props.produccion._id, this.props.rowNumber);
   }    
 
   render() {
@@ -43,7 +43,8 @@ class ItemProduccion extends Component
 ItemProduccion.propTypes = {
   produccion: PropTypes.object.isRequired,
   usuario: PropTypes.object,
-  handleSeleccionDetail:PropTypes.func.isRequired
+  handleSeleccionDetail:PropTypes.func.isRequired,
+  rowNumber: PropTypes.number
 };
 
 export default ItemProduccion;

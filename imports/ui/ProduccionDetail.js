@@ -112,7 +112,7 @@ class ProduccionDetail extends Component
     return (
       <div>
         {this.renderError()}
-        <div className="row pb-sm-4">        
+        <div className="row">        
           <div className="col-md-4">
             <div className="card">        
               <div className="card-body">
