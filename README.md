@@ -34,7 +34,7 @@ WebApp to find the artists that you need for any art production.
 
 ## Clone
 
-- Clone this repo to your local machine using git typing this in your cosole: `git clone hmeteor test --driver-package meteortesting:mocha` 
+- Clone this repo to your local machine using git typing this in your cosole: `git clone https://github.com/jd-vega11/finalproject.git`
 
 ## Team
 
