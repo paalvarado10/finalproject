@@ -86,6 +86,27 @@ class ArtistaDetail extends Component
             <div className="card-body">
               <h6 className="card-title">Un poco más sobre {this.props.artista.profile.nombre} </h6>               
               <p className="card-text">{this.props.artista.profile.descripcion}</p>
+              {
+                this.props.artista.headline != null ? 
+                  <p className="card-text">{this.props.artista.headline}</p>
+                  : ''
+              }
+              {
+                this.props.artista.industry != null ? 
+                  <p className="card-text">{this.props.artista.industry}</p>
+                  : ''
+              }
+              {
+                this.props.artista.location != null ? 
+                  <p className="card-text">{this.props.artista.location}</p>
+                  : ''
+              }
+              {
+                this.props.artista.numPositions != null ? 
+                  <p className="card-text">{this.props.artista.numPositions}</p>
+                  : ''
+              }
+  
             </div>                     
           </div>
         

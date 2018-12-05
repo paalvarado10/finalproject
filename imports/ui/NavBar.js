@@ -16,7 +16,7 @@ class NavBar extends Component {
       mostrar: false
     };
 
-    this.componentDidMount = this.componentDidMount.bind(this);
+    this.verificarLinkedIn = this.verificarLinkedIn.bind(this);
     this.cargarBoton = this.cargarBoton.bind(this);
     this.cargarDatos = this.cargarDatos.bind(this);
     this.cargaMongo = this.cargaMongo.bind(this);
@@ -61,7 +61,7 @@ class NavBar extends Component {
     this.setState({mostrar: false});  
   }
 
-  componentDidUpdate()
+  verificarLinkedIn()
   {
     if (this.props.currentUser != null) {
       if(Artistas.find({}).fetch().length !== 0)
@@ -73,6 +73,7 @@ class NavBar extends Component {
   }
 
   componentDidMount() {
+    this.verificarLinkedIn();
     console.log(window.location.href);
     var url_string = window.location.href;
     var url = new URL(url_string);
@@ -81,7 +82,11 @@ class NavBar extends Component {
     if (c != null) {
       this.setState({ RegistradoLinkedIn: true });
 
-      fetch('https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&code=' + c + '&redirect_uri=http://localhost:3000&client_id=78thawjoan2g2s&client_secret=SstD4bmgYig2cTV0', { 'Access-Control-Allow-Origin': '*', method: 'POST' })
+
+
+
+      fetch('https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&code=' + c + '&redirect_uri=https://finalprojectr11.herokuapp.com&client_id=78thawjoan2g2s&client_secret=SstD4bmgYig2cTV0', 
+        { 'Access-Control-Allow-Origin': '*', method: 'POST' })
         .then(response => response.json())
         .then(data => this.setState({ access: data.access_token }))
         .then(data => this.cargarDatos());
@@ -103,7 +108,7 @@ class NavBar extends Component {
           <div className="row" id="linksnavbar">
 
             {this.state.mostrar ?
-              <a href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78thawjoan2g2s&redirect_uri=http://localhost:3000&state=DCEeFWf45A53sdfKef424">
+              <a href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78thawjoan2g2s&redirect_uri=https://finalprojectr11.herokuapp.com&state=DCEeFWf45A53sdfKef424">
                 <div className="col nav-item navbar-tab">
                   <p>Conéctate con LinkedIn</p>
                   <i className="fab fa-linkedin iconos"></i>

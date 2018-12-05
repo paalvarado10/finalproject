@@ -13,7 +13,7 @@ if (Meteor.isServer) {
 
 Meteor.methods({
 
-  //se inserta una nueva produccion. 
+  //se inserta un nuevo artista. 
   'artistas.insert'(idArtista,profile,firstName,lastName,headline,industry,location,numConnections,numPositions) {
 
     check(idArtista, String);
