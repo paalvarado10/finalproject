@@ -15,7 +15,7 @@ Meteor.methods({
 
   //se inserta un nuevo artista. 
   'artistas.insert'(idArtista,profile,firstName,lastName,headline,industry,location,numConnections,numPositions) {
-
+//check(firstName, String);...
     check(idArtista, String);
 
     Artistas.insert({
